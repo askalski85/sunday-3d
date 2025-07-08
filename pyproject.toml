@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "model1"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "model1", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+trimesh = {extras = ["all"], version = "^4.6.12"}
+pyglet = "<2"
+typer = {extras = ["all"], version = "^0.16.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+main = "model1.main:main"

@@ -6,6 +6,7 @@ from .units import *
 
 class API:
     scene: trimesh.Scene = None
+    geom: trimesh.Trimesh = None
     name: str = None
     extension: str = 'stl'
 
@@ -24,9 +25,9 @@ class API:
         self.right()
         self.back()
         self.front()
-
+    
     def add_box(self,*args, **kwargs) -> None:
-        self.scene.add_geometry(self.box(*args, **kwargs))
+        self.add(self.box(*args, **kwargs))
 
     def box(self, width: mm, depth: mm, height: mm, twidth: mm, tdepth: mm, theight: mm) -> trimesh.Trimesh:
         return trimesh.creation.box(extents=[width, depth, height], transform = trimesh.transformations.translation_matrix([twidth, tdepth, theight]))
@@ -55,10 +56,10 @@ class API:
 
     def addform(self, g: trimesh.Trimesh, x: mm, z: mm, y: mm) -> None:
         self.transform(g, x, z, y)
-        self.scene.add_geometry(g)
+        self.add(g.copy())
 
     def add(self, g: trimesh.Trimesh) -> None:
-        self.scene.add_geometry(g)
+        self.scene.add_geometry(g.copy())
 
     def get(self) -> trimesh.Scene:
         return self.scene
